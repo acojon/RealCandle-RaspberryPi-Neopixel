@@ -1,9 +1,15 @@
 {
     "cSpell.words": [
         "Adafruit",
+        "GRBW",
         "Neopixel",
+        "RGBW",
+        "RGBWW",
         "blinka",
         "circuitpython",
-        "coldcpu's"
+        "coldcpu's",
+        "csvfile",
+        "isfile",
+        "neopixels"
     ]
 }
