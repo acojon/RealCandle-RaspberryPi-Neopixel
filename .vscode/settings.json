@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
+        "Adafruit",
         "Neopixel",
+        "blinka",
+        "circuitpython",
         "coldcpu's"
     ]
 }
