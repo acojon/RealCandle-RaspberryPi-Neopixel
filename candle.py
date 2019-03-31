@@ -4,8 +4,20 @@ import neopixel
 import RPi.GPIO as GPIO
 
 pixel_pin = board.D18
+
+# The number of lights in your neopixel strand
 num_pixels = 7
+
+# Are these neopixels RGB, or RGBW/RGBWW?
+#
+# RGB, use this one:
+# four_color_neopixels = False
+#
+# RGBW/RGBWW, use this one:
 four_color_neopixels = True
+
+# Sometimes the color order of the Neopixel is RGB, sometimes it's GRB, etc.
+# If the color of the candle flame looks weird, say Green, switch the order :)
 led_order = neopixel.GRBW
 
 strip = neopixel.NeoPixel(
