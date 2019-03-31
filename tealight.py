@@ -57,7 +57,7 @@ class candle():
 
         self.four_color_neopixels = four_color_neopixels
 
-        # Generate the burn brightness / Rainbow pattern tuples.
+        # Generate the burn brightness pattern tuples.
         self.normal_brightness = self.read_csv_file(self.normal_burn_file)
         self.flicker_brightness = self.read_csv_file(self.flicker_burn_file)
         self.cycle_tracker_reset = len(self.normal_brightness) - 1
