@@ -2,6 +2,7 @@
     "cSpell.words": [
         "Adafruit",
         "Adafruit's",
+        "Arduino",
         "GRBW",
         "Neopixel",
         "RGBW",
@@ -11,6 +12,7 @@
         "coldcpu's",
         "csvfile",
         "isfile",
-        "neopixels"
+        "neopixels",
+        "thingie"
     ]
 }

@@ -2,6 +2,27 @@
 
 Based on coldcpu's excellent [“Reverse engineering” a real candle](https://cpldcpu.wordpress.com/2016/01/05/reverse-engineering-a-real-candle/) and forked from [RealCandle](https://github.com/cpldcpu/RealCandle)
 
+Like many folks, one of my first projects with a micro controller thingie, was
+ to make an electronic candle.  My micro controller of choice is the Raspberry
+ Pi.  When I was looking for examples to help me out, most of the examples are
+ written for an Arduino (or related micro controller) and didn't really help me
+ out.  I wasn't able to come up with a flickering candle pattern on my own that
+ I liked, and stealing patterns from other projects (once I understood how a
+ given project worked,) didn't yield patterns I liked either.  And then I found
+ the project linked above!
+
+I used the .csv files from the project, and some other clues, and by playing
+ back the patterns encoded in the two .csv files, I got an artificial candle
+ that I really like!
+
+In my own implementation, I've included a switch to turn the candle on and off,
+ MQTT functionality so that the home automation software can turn the candle on
+ and off, and the flicker probability changes as the local wind speed changes.
+ That kind of script is very much customized to my own environment, and it may
+ not be helpful to someone who is looking for a LED candle to run on a
+ Raspberry Pi.  This repository should make for a great starting point to make
+ your own candle, and add the additional functionality that you desire.
+
 ## Setup
 
 The code uses the Adafruit CircuitPython libraries to manage the Neopixel.  The python code relies on a couple supporting libraries
