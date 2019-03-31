@@ -28,11 +28,6 @@ strip = neopixel.NeoPixel(
     pixel_order=led_order
 )
 
-# Candle Color Variables (What color is our flame?)
-red = 255
-green = 127
-blue = 10
-
 # A steady candle is cool, but a candle that occasionally flickers is cooler.
 # You can set the value between 1 - 10.  The lower the value, the more likely
 # the candle will switch to the flickering pattern.
@@ -41,11 +36,7 @@ flicker_probability = 8
 candle = tealight.candle(
     pixel = 0,
     neopixel_strip = strip,
-    interval = .0020,
-    four_color_neopixels = four_color_neopixels,
-    red = red,
-    green = green,
-    blue = blue
+    four_color_neopixels = four_color_neopixels
 )
 candle.cleanup()
 
