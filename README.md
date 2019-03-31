@@ -25,7 +25,10 @@ In my own implementation, I've included a switch to turn the candle on and off,
 
 ## Setup
 
-The code uses the Adafruit CircuitPython libraries to manage the Neopixel.  The python code relies on a couple supporting libraries
+The script uses Python3, the code uses the Adafruit CircuitPython libraries to
+ manage the Neopixel.  The python code relies on a couple supporting libraries.
+ The Circuit Python libraries that Python is referencing are written for
+ Python3.
 
 ``` bash
 pip3 install adafruit-blinka rpi_ws281x adafruit-circuitpython-neopixel
@@ -112,7 +115,7 @@ your candle to burn a different color :)
 The default red value for the candle.  Defaults to 10.  Change it if you want
 your candle to burn a different color :)
 
-#### An example:
+#### Some examples
 
 ```python3
 # This initializes the candle object, for the first Neopixel in the strip, and
@@ -145,3 +148,45 @@ Call this method when you want to turn off the Neopixel connected to the
 
 Every pass through your loop, call this method.  Do not include a sleep in your
  loop, as this will mess with the timing of the candle pattern.
+
+## What's with the CPU usage / Why is there no sleep in the loop
+
+The timing on the script is pretty tight, the pattern for each candle needs to
+ be incremented every 2 milliseconds.  Raspberry Pis do not a real time
+ operating system.  The Raspberry Pi is busy handling network requests,
+ file accesses, doing system related work, ___AND___ running the candle script.
+ It doesn't have the ability to guarantee that it can update each candle object
+ every 2 milliseconds.  Ok, no big, the way the candle module works, and the
+ human eye work, it should be able to handle if, from time to time, the timing
+ for each candle object is off by a few fractions of a millisecond.
+
+A lot of python scripts that run a loop and are running on a Raspberry Pi will
+ use the time.sleep() function.  The script can rely on a GPIO interrupt, or it
+ is doing a periodic task that doesn't require a high degree of precision in
+ regards to when the script is run.  Consider a temperature logging script that
+ runs once a minute.  If the script runs every 60, or every 61-ish seconds,
+ that isn't going to be a problem.
+
+The timing on the candle is really important, and really fast.  It needs to be
+ updated every 2 milliseconds.  The way the script gets as close to this timing
+ as it can, is that there is no delay in the loop.  Python goes through the
+ loop as fast as it can.  This consumes a lot of CPU.  
+
+Previous versions of the script uses Python2.  When the script was running, it
+ would spike the usage of the CPU to 100%.  On a multi-core Raspberry Pi (2, 3,
+ 3a, etc) this isn't that much of a problem.  A Raspberry Pi Zero only has one
+ core.  When you max that CPU to 100%, it becomes harder for the CPU to handle
+ the other system tasks.
+
+The current version makes use of the Circuit Python libraries from Adafruit.
+ The Neopixel library does some clever things like using DMA to communicate
+ with the Neopixels.  This takes some of the load off the CPU, but not all of
+ it.  The CPU usage tends to float between ~45% - 95% on a Raspberry Pi Zero W.
+ This is a huge improvement from the pegged at 100% behavior in Python2, but
+ the CPU load is still considerable. :)
+
+If you're using this script to create a couple candles, put a little thought
+ into your choice of Raspberry Pi hardware. If the candle is the only thing
+ running on the Raspberry Pi, a Raspberry Pi Zero should be just fine.  If you
+ are doing other things with your Raspberry Pi, then consider a multi-core
+ Raspberry Pi (2, 3, 3a, etc.)
