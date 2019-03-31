@@ -53,19 +53,56 @@ script and the tealight module for an example use case.
 
 ### __setup__
 
+When you're initializing a candle object, you need to include a number of
+parameters:
+
 #### pixel
+
+Which Neopixel on your strip of Neopixels does the candle object manage?
+Neopixel number 0? Number 3?
 
 #### neopixel_strip
 
+The Neopixel object that represents the entire strip of Neopixels.  (You
+ initialized that a little earlier in the script)
+
 #### interval
+
+How much time must pass before the candle object will update the Neopixel to
+the next brightness value in the pattern?  Defaults to .0020 seconds. I
+ recommend you take the default vaule :)
 
 #### four_color_neopixels
 
+True or False?  Is this a  3 color or a 4 color neopixel?
+
 #### red
+
+The default red value for the candle.  Defaults to 255.  Change it if you want
+your candle to burn a different color :)
 
 #### green
 
+The default green value for the candle.  Defaults to 127.  Change it if you want
+your candle to burn a different color :)
+
 #### blue
+
+The default red value for the candle.  Defaults to 10.  Change it if you want
+your candle to burn a different color :)
+
+#### An example:
+
+```python3
+# This initializes the candle object, for the first Neopixel in the strip. It
+ is a four color neopixel,
+candle = tealight.candle(
+    pixel = 0,
+    neopixel_strip = strip,
+    four_color_neopixels = True
+)
+
+```
 
 ### cleanup
 
