@@ -70,7 +70,7 @@ The Neopixel object that represents the entire strip of Neopixels.  (You
 
 How much time must pass before the candle object will update the Neopixel to
 the next brightness value in the pattern?  Defaults to .0020 seconds. I
- recommend you take the default vaule :)
+ recommend you take the default value :)
 
 #### four_color_neopixels
 
@@ -94,16 +94,33 @@ your candle to burn a different color :)
 #### An example:
 
 ```python3
-# This initializes the candle object, for the first Neopixel in the strip. It
- is a four color neopixel,
+# This initializes the candle object, for the first Neopixel in the strip, and
+# the strip Neopixels have four colors
 candle = tealight.candle(
     pixel = 0,
     neopixel_strip = strip,
     four_color_neopixels = True
 )
 
+# This initializes the candle object, for the 4th Neopixel in the strip, the
+# strip Neopixels have three colors, and the candle will have a Green-Blue-Ish
+# color.
+candle = tealight.candle(
+    pixel = 3,
+    neopixel_strip = strip,
+    four_color_neopixels = False,
+    red = 10,
+    green = 255,
+    blue = 128
+)
 ```
 
 ### cleanup
 
+Call this method when you want to turn off the Neopixel connected to the
+ candle object.  I like to use these as part of the shutdown/quit sequence.
+
 ### update
+
+Every pass through your loop, call this method.  Do not include a sleep in your
+ loop, as this will mess with the timing of the candle pattern.
