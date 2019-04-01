@@ -63,6 +63,14 @@ class candle():
         self.cycle_tracker_reset = len(self.normal_brightness) - 1
 
     def build_candle_array(self, data):
+        '''
+        The source data in the csv file only references the brightness of the
+        candle, not the Red, Green and Blue brightness values.  This function
+        will calculate the Red, Green and Blue brightness value based on the
+        brightness value in the "data" variable.  The Red, Green, Blue data is
+        saved as a tuple.  The function returns a tuple of tuples to the main
+        program.
+        '''
         maplen = 200
         scale = 0.8 * maplen / statistics.median(data)
         temp_tuple = []
@@ -84,6 +92,11 @@ class candle():
         return temp_tuple
 
     def read_csv_file(self, file_name):
+        '''
+        This function reads in the referenced .csv file, and returns a tuple
+        of tuples to the main program.  Each tuple represents a Red, Green and
+        blue value, based on the pattern information contained in the .csv file
+        '''
         data_tracker = []
         if os.path.isfile(file_name):
             with open(file_name) as csvfile:
@@ -97,6 +110,12 @@ class candle():
         return final_tuple
 
     def cleanup(self):
+        '''
+        This method will set the red, green, blue, and optional White values
+        for the current pixel to off.
+
+        Useful for turning off a given pixel :)
+        '''
         # Set the LED to black; i.e., turn off the current LED.
         if (self.four_color_neopixels):
             self.neopixel_strip[self.pixel] = (0,0,0,0)
