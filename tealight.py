@@ -104,13 +104,6 @@ class candle():
             self.neopixel_strip[self.pixel] = (0,0,0)
         self.neopixel_strip.show()
 
-    def reset(self):
-        # Reset the internal state to that of a new
-        # object.
-        self.active_pattern = "choose"
-        self.first_pass = True
-        self.last_update = time.time()
-
     def update(self,chance_flicker):
         if (self.first_pass):
             rand_sleep = (randint(0,2)) + (randint(0,1000)/1000)
