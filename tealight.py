@@ -159,6 +159,14 @@ class candle():
                     self.active_pattern = "normal"
 
     def normal(self):
+        '''
+        This function is responsible for iterating through the normal candle
+        burn pattern.  The pattern is a series of brightness value tuples,
+        stored in the flicker_brightness variable. The cycle_tracker variable
+        is a bookmark, indicating where the current point is in the playback of
+        the pattern.  If the tracker rolls over the total length of the tuple,
+        the state variables are reset to starting conditions.
+        '''
         if (self.four_color_neopixels):
             self.neopixel_strip[self.pixel] = (
                 (self.normal_brightness[self.cycle_tracker][0]),
@@ -179,6 +187,14 @@ class candle():
             self.first_pass = True
 
     def flicker(self):
+        '''
+        This function is responsible for iterating through the flicker pattern.
+        The pattern is a series of brightness value tuples, stored in the
+        flicker_brightness variable. The cycle_tracker variable is a bookmark,
+        indicating where the current point is in the playback of the pattern.
+        If the tracker rolls over the total length of the tuple, the state
+        variables are reset to starting conditions.
+        '''
         if (self.four_color_neopixels):
             self.neopixel_strip[self.pixel] = (
                 self.flicker_brightness[self.cycle_tracker][0],
